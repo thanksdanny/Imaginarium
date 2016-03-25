@@ -13,6 +13,8 @@
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIImage *image;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+
 @end
 
 @implementation ImageViewController
@@ -32,7 +34,31 @@
 
 - (void)setImageURL:(NSURL *)imageURL {
     _imageURL = imageURL;
-    self.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:self.imageURL]];// 因为这行是从网上获取，所以会阻塞进程
+//    self.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:self.imageURL]];// 因为这行是从网上获取，所以会阻塞进程
+    [self startDownloadingImage];
+}
+
+- (void)startDownloadingImage {
+    self.image = nil; // 下载新图片时，旧图片需要清空
+    if (self.imageURL) {
+        [self.spinner startAnimating];
+        NSURLRequest *request = [NSURLRequest requestWithURL:self.imageURL];
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+        NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+        NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request
+            completionHandler:^(NSURL * _Nullable localfile, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+                if (!error) {
+                    if ([request.URL isEqual:self.imageURL]) { // 该判断防止某个对象，修改了这个imageURL在下载过程中
+                        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:localfile]]; // 因为这是一个本地文件，所以不会阻塞
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            self.image = image; // 要在主队列上执行
+                        });
+                        [self performSelectorOnMainThread:@selector(setImage:) withObject:image waitUntilDone:NO];
+                    }
+                }
+            }];
+        [task resume];
+    }
 }
 
 - (UIImageView *)imageView {
@@ -51,6 +77,7 @@
     [self.imageView sizeToFit];
     // 记得设置contentsize
     self.scrollView.contentSize = self.image ? self.image.size : CGSizeZero; // 优化一下，添加个三目防止传进image为空的情况
+    [self.spinner stopAnimating];
 }
 
 - (void)viewDidLoad {
