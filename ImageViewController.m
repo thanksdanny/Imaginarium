@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIImage *image;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @end
 
 @implementation ImageViewController
@@ -35,11 +36,12 @@
 - (void)setImage:(UIImage *)image {
     self.imageView.image = image;
     [self.imageView sizeToFit];
+    self.scrollView.contentSize = self.image.size;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.view addSubview:self.imageView];
+    [self.scrollView addSubview:self.imageView];
 }
 
 @end
