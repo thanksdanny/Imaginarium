@@ -13,6 +13,7 @@
 		FDB4065B1CA50FED0076BEA9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB406591CA50FED0076BEA9 /* Main.storyboard */; };
 		FDB4065D1CA50FED0076BEA9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FDB4065C1CA50FED0076BEA9 /* Assets.xcassets */; };
 		FDB406601CA50FED0076BEA9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FDB4065E1CA50FED0076BEA9 /* LaunchScreen.storyboard */; };
+		FDB406691CA510330076BEA9 /* ImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FDB406681CA510330076BEA9 /* ImageViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		FDB4065C1CA50FED0076BEA9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FDB4065F1CA50FED0076BEA9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FDB406611CA50FED0076BEA9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FDB406671CA510330076BEA9 /* ImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ImageViewController.h; path = ../ImageViewController.h; sourceTree = "<group>"; };
+		FDB406681CA510330076BEA9 /* ImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ImageViewController.m; path = ../ImageViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +63,8 @@
 			children = (
 				FDB406531CA50FED0076BEA9 /* AppDelegate.h */,
 				FDB406541CA50FED0076BEA9 /* AppDelegate.m */,
+				FDB406671CA510330076BEA9 /* ImageViewController.h */,
+				FDB406681CA510330076BEA9 /* ImageViewController.m */,
 				FDB406561CA50FED0076BEA9 /* ViewController.h */,
 				FDB406571CA50FED0076BEA9 /* ViewController.m */,
 				FDB406591CA50FED0076BEA9 /* Main.storyboard */,
@@ -151,6 +156,7 @@
 			files = (
 				FDB406581CA50FED0076BEA9 /* ViewController.m in Sources */,
 				FDB406551CA50FED0076BEA9 /* AppDelegate.m in Sources */,
+				FDB406691CA510330076BEA9 /* ImageViewController.m in Sources */,
 				FDB406521CA50FED0076BEA9 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
