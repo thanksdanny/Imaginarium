@@ -17,6 +17,12 @@
 
 @implementation ImageViewController
 
+- (void)setScrollView:(UIScrollView *)scrollView {
+    _scrollView = scrollView;
+    self.scrollView.contentSize = self.image ? self.image.size : CGSizeZero;
+    // 上面两行代码与setImage()保持一致，因为scrollView这个属性可能会在setImage这个方法执行后被设置
+}
+
 - (void)setImageURL:(NSURL *)imageURL {
     _imageURL = imageURL;
     self.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:self.imageURL]];// 因为这行是从网上获取，所以会阻塞进程
@@ -36,7 +42,8 @@
 - (void)setImage:(UIImage *)image {
     self.imageView.image = image;
     [self.imageView sizeToFit];
-    self.scrollView.contentSize = self.image.size;
+    // 记得设置contentsize
+    self.scrollView.contentSize = self.image ? self.image.size : CGSizeZero; // 优化一下，添加个三目防止传进image为空的情况
 }
 
 - (void)viewDidLoad {
