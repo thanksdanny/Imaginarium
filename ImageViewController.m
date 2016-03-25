@@ -8,7 +8,7 @@
 
 #import "ImageViewController.h"
 
-@interface ImageViewController ()
+@interface ImageViewController () <UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIImage *image;
@@ -19,8 +19,15 @@
 
 - (void)setScrollView:(UIScrollView *)scrollView {
     _scrollView = scrollView;
+    _scrollView.minimumZoomScale = 0.2;
+    _scrollView.maximumZoomScale = 2.0;
+    _scrollView.delegate = self;
     self.scrollView.contentSize = self.image ? self.image.size : CGSizeZero;
     // 上面两行代码与setImage()保持一致，因为scrollView这个属性可能会在setImage这个方法执行后被设置
+}
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+    return self.imageView;
 }
 
 - (void)setImageURL:(NSURL *)imageURL {
